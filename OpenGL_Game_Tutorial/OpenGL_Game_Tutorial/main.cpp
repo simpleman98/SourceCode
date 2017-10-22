@@ -1,12 +1,13 @@
+#include <GL/glew.h>
+#include "MainGame.h"
 #include <iostream>
 
 
-using namespace std;
-int main()
+
+int main(int argc, char** argv)
 {
-	// Hallo Welt
-	cout << "Hello World!";
-	getchar();
+	MainGame mainGame;
+	mainGame.Run();
 
 	return 0;
 }
