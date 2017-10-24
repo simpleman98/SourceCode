@@ -1,5 +1,6 @@
 #include "Errors.h"
 #include <iostream>
+#include <cstdlib>
 
 #include <SDL\SDL.h>
 void fatalProgramError(std::string errorString)
@@ -8,7 +9,6 @@ void fatalProgramError(std::string errorString)
 	std::cout << "Enter any key to quit !";
 	int tmp;
 	std::cin >> tmp;
-	SDL_Quit();
-	exit(1);
+	exit(69);
 
 }
