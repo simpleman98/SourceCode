@@ -2,25 +2,17 @@
 
 #include <iostream>
 #include <string>
+#include "Errors.h"
 
 
-void fatalError(std::string errorString)
-{
-	std::cout << errorString << std::endl;
-	std::cout << "Enter any key to quit !";
-	int tmp;
-	std::cin >> tmp;
-	SDL_Quit();
-	exit(1);
-
-}
 MainGame::MainGame()
+	:_screenWidth(800),
+	_screenHeight(500),
+	_time(0.0f),_window(nullptr),
+	_gameState(GameState::PLAY)
 {
 
-	_window = nullptr;
-	_screenWidth = 800;
-	_screenHeight = 500;
-	_gameState = GameState::PLAY;
+	
 }
 
 MainGame::~MainGame()
@@ -47,19 +39,19 @@ void MainGame::initSystems()
 
 	if (_window == nullptr)
 	{
-		fatalError("SDL Window could not be created!");
+		fatalProgramError("SDL Window could not be created!");
 	}
 
 	SDL_GLContext glContext = SDL_GL_CreateContext(_window);
 	if (glContext == nullptr)
 	{
-		fatalError("SDL_GL context could not be created!");
+		fatalProgramError("SDL_GL context could not be created!");
 
 	}
 	GLenum error = glewInit();
 	if (error != GLEW_OK)
 	{
-		fatalError("Could not initialize glew!");
+		fatalProgramError("Could not initialize glew!");
 	}
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	glClearColor(0.0f, 0.0f, 1.0f, 1.0f); // Background Color
@@ -93,16 +85,22 @@ void MainGame::gameLoop()
 	while (_gameState != GameState::EXIT)
 	{
 		processInput();
+
+		_time += 0.001;
 		drawGame();
 	}
 }
 
 void MainGame::drawGame()
 {
+	
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	  
 	_colorProgram.use();
+
+	GLuint timeLocation = _colorProgram.getUniformLocation("time");
+	glUniform1f(timeLocation, _time);
 	_sprite.draw();   
 	_colorProgram.use();
 
