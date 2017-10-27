@@ -1,8 +1,0 @@
-﻿  MainGame.cpp
-     Creating library C:\SourceCode\OpenGL_Game_Tutorial\Release\OpenGL_Game_Tutorial.lib and object C:\SourceCode\OpenGL_Game_Tutorial\Release\OpenGL_Game_Tutorial.exp
-  Generating code
-  1 of 236 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    35 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  OpenGL_Game_Tutorial.vcxproj -> C:\SourceCode\OpenGL_Game_Tutorial\Release\OpenGL_Game_Tutorial.exe

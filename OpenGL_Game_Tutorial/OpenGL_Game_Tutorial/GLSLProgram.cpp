@@ -17,20 +17,26 @@ GLSLProgram::~GLSLProgram()
 
 void GLSLProgram::compileShaders(const std::string& vertexShaderFilePath, const std::string & fragmentShaderFilepath)
 {
+	// create shader program
+	//Get a program object.
 	_programID = glCreateProgram();
 
+	//create Vertex shader and get vertexShaderID
 	_vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	if (_vertexShaderID == 0)
 	{
 		fatalProgramError("Vertex shader failed to be created!");
 	}
 
+	//create fragment shader and get fragmentID
 	_fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 	if (_fragmentShaderID == 0)
 	{
 		fatalProgramError("Fragment shader failed to be created!");
 	}
 
+
+	//compile Shaders 
 	compileShader(vertexShaderFilePath, _vertexShaderID);
 	compileShader(fragmentShaderFilepath, _fragmentShaderID);
 }
@@ -39,7 +45,7 @@ void GLSLProgram::linkShaders()
 {
 	//Vertex and fragment shaders are successfully compiled.
 	//Now time to link them together into a program.
-	//Get a program object.
+	
 	
 
 	//Attach our shaders to our program
@@ -71,7 +77,8 @@ void GLSLProgram::linkShaders()
 		fatalProgramError("Shader failed to compile !");
 	}
 
-	//Always detach shaders after a successful link.
+	//Always detach (ablösen) shaders after a successful link.
+
 	glDetachShader(_programID, _vertexShaderID);
 	glDetachShader(_programID, _fragmentShaderID);
 	glDeleteShader(_vertexShaderID);
@@ -85,9 +92,9 @@ void GLSLProgram::addAttribute(const std::string & attributeName)
 	glBindAttribLocation(_programID, _numAttribute++, attributeName.c_str());
 }
 
-GLuint GLSLProgram::getUniformLocation(const std::string& uniformName)
+GLint GLSLProgram::getUniformLocation(const std::string& uniformName)
 {
-	GLuint location = glGetUniformLocation(_programID, uniformName.c_str());
+	GLint location = glGetUniformLocation(_programID, uniformName.c_str());
 
 	if (location == GL_INVALID_INDEX)
 	{
@@ -116,7 +123,7 @@ void GLSLProgram::unuse()
 
 void GLSLProgram::compileShader(const std::string& filePath, GLuint id)
 {
-	
+	// crate an ifstream
 	std::ifstream vertexFile(filePath, std::ifstream::in);;
 
 	
@@ -129,6 +136,7 @@ void GLSLProgram::compileShader(const std::string& filePath, GLuint id)
 	std::string fileContents = "";
 	std::string line = "";
 
+	//read every line of the textfile 
 	while (std::getline(vertexFile, line))
 	{
 		fileContents += line + "\n";
