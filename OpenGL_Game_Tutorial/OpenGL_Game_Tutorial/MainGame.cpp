@@ -2,14 +2,17 @@
 
 #include <iostream>
 #include <string>
-#include "Errors.h"
+
+#include <MyGameEngine\Errors.h>
+
 
 
 MainGame::MainGame()
 	:_screenWidth(1000),
 	_screenHeight(600),
-	_time(0.0f),_window(nullptr),
-	_gameState(GameState::PLAY)
+	_time(0.0f), 
+	_gameState(GameState::PLAY),
+	_maxFPS(60.0f)
 {
 
 	
@@ -27,13 +30,13 @@ void MainGame::Run()
    /* Sprite s(_screenWidth, _screenHeight);
 	_sprite = s;
 	_sprite.initNormalized(0.0f, 0.0f, 500.0f, 500.0f);*/
-	_sprites.push_back(new Sprite());
+	_sprites.push_back(new MyGameEngine::Sprite());
 	_sprites.back()->init(-1.0f, -1.0f, 1.0f, 1.0f, "Textures/sphere.png");
 
-	_sprites.push_back(new Sprite());
+	_sprites.push_back(new MyGameEngine::Sprite());
 	_sprites.back()->init(0.0f, -1.0f, 1.0f, 1.0f, "Textures/sphere.png");
 
-	_sprites.push_back(new Sprite());
+	_sprites.push_back(new MyGameEngine::Sprite());
 	_sprites.back()->init(-1.0f, 0.0f, 1.0f, 1.0f, "Textures/sphere.png");
 	
 
@@ -48,38 +51,9 @@ void MainGame::Run()
 void MainGame::initSystems()
 {
 	//Initianal SDL
-	SDL_Init(SDL_INIT_EVERYTHING);
+	MyGameEngine::init();
 
-
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-
-	// craete Window 
-	_window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		_screenWidth, _screenHeight, SDL_WINDOW_OPENGL);
-	if (_window == nullptr)
-	{
-		fatalProgramError("SDL Window could not be created!");
-	}
-	
-	// create Context
-	SDL_GLContext glContext = SDL_GL_CreateContext(_window);
-	if (glContext == nullptr)
-	{
-		fatalProgramError("SDL_GL context could not be created!");
-
-	}
-
-	// init glew 
-	GLenum error = glewInit();
-	if (error != GLEW_OK)
-	{
-		fatalProgramError("Could not initialize glew!");
-	}
-	
-	// Set background Color
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f); 
-
+	_window.create("Game Engine", _screenWidth, _screenHeight, 0);
 
 	// Initialize Shaders
 	initShaders();
@@ -110,10 +84,30 @@ void MainGame::gameLoop()
 {
 	while (_gameState != GameState::EXIT)
 	{
+		//used for frame time measuring
+		float startTicks = SDL_GetTicks();
 		processInput();
 
 		_time += 0.001f;
 		drawGame();
+
+		calculateFPS();
+		//print only once every 10 frames
+		static int frameCounter = 0;
+		frameCounter++;
+
+		if (frameCounter == 10)
+		{
+			std::cout << _fps << std::endl;
+			frameCounter = 0;
+		}
+		float frameTicks = SDL_GetTicks() - startTicks;
+		if (1000.0f /_maxFPS > frameTicks)
+		{
+			SDL_Delay(1000.0f / _maxFPS - frameTicks);
+		}
+
+
 	}
 }
 
@@ -144,7 +138,7 @@ void MainGame::drawGame()
 
 	_colorProgram.unuse();
 
-	SDL_GL_SwapWindow(_window);
+	_window.swapBuffer();
 
 }
 
@@ -156,6 +150,53 @@ void MainGame::initShaders()
 	_colorProgram.addAttribute("vertexUV");
 	_colorProgram.linkShaders();
 
+}
+
+void MainGame::calculateFPS()
+{
+	static const int NUM_SAMPLES = 10; // number of average
+	static float frameTime[NUM_SAMPLES];
+	static int currentFrame = 0;
+
+
+	static float prevTicks = SDL_GetTicks();
+
+	float currentTicks;
+	currentTicks = SDL_GetTicks();
+
+	_frameTime = currentTicks - prevTicks;
+
+	frameTime[currentFrame % NUM_SAMPLES] = _frameTime;
+
+	prevTicks = currentTicks;
+
+	int count;
+	currentFrame++;
+	if (currentFrame < NUM_SAMPLES)
+	{
+		count = currentFrame;
+	}
+	else
+	{
+		count = NUM_SAMPLES;
+	}
+
+	float frameTimeAverage = 0;
+	for (int i = 0; i < count; i++)
+	{
+		frameTimeAverage += frameTime[i];
+	}
+	frameTimeAverage /= count;
+
+	if (frameTimeAverage > 0)
+	{
+		_fps = 1000.0f / frameTimeAverage;
+	}
+	else
+	{
+		_fps = 60.0f;
+	}
+	
 }
 
 
