@@ -1,10 +1,15 @@
 c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\vc141.pdb
 c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\vc141.idb
-c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\main.obj
 c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\errors.obj
 c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\glslprogram.obj
+c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\main.obj
 c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\maingame.obj
 c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\sprite.obj
+c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\imageloader.obj
+c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\iomanager.obj
+c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\picopng.obj
+c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\resourcemanager.obj
+c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\texturecache.obj
 c:\sourcecode\opengl_game_tutorial\debug\opengl_game_tutorial.exe
 c:\sourcecode\opengl_game_tutorial\debug\opengl_game_tutorial.ilk
 c:\sourcecode\opengl_game_tutorial\debug\opengl_game_tutorial.pdb
@@ -14,7 +19,6 @@ c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\opengl_g.5318e4ce.
 c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\opengl_g.5318e4ce.tlog\cl.read.1.tlog
 c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\opengl_g.5318e4ce.tlog\cl.write.1.tlog
 c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\opengl_g.5318e4ce.tlog\link.command.1.tlog
-c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\opengl_g.5318e4ce.tlog\link.delete.1.tlog
 c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\opengl_g.5318e4ce.tlog\link.read.1.tlog
 c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\opengl_g.5318e4ce.tlog\link.write.1.tlog
 c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\debug\opengl_g.5318e4ce.tlog\opengl_game_tutorial.write.1u.tlog

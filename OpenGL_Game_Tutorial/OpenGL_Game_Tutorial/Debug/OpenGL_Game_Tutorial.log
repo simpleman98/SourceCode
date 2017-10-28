@@ -1,4 +1,12 @@
 ﻿  MainGame.cpp
-c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\maingame.cpp(138): warning C4018: '<': signed/unsigned mismatch
+c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\maingame.cpp(89): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
+c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\maingame.cpp(108): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
+c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\maingame.cpp(133): warning C4018: '<': signed/unsigned mismatch
+c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\maingame.cpp(163): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
+c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\maingame.cpp(166): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+  Generating Code...
+  Compiling...
+  main.cpp
+  Generating Code...
      Creating library C:\SourceCode\OpenGL_Game_Tutorial\Debug\OpenGL_Game_Tutorial.lib and object C:\SourceCode\OpenGL_Game_Tutorial\Debug\OpenGL_Game_Tutorial.exp
   OpenGL_Game_Tutorial.vcxproj -> C:\SourceCode\OpenGL_Game_Tutorial\Debug\OpenGL_Game_Tutorial.exe
