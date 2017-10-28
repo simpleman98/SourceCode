@@ -6,6 +6,7 @@
 #include "Sprite.h"
 #include "GLSLProgram.h"
 #include "GLTexture.h"
+#include <vector>
 
 enum class GameState { PLAY, EXIT };
 
@@ -33,8 +34,8 @@ private:
 
 	GameState _gameState;
 	Sprite _sprite;
-	Sprite* _spriteObj;
-	GLTexture _playerTexture;
+	std::vector<Sprite*> _sprites;
+
 
 
 	GLSLProgram _colorProgram;

@@ -11,7 +11,7 @@ out vec2 fragmentUV;
 
 void main()
 {
-	gl_Position.xy = vertexPosition * 2;
+	gl_Position.xy = vertexPosition * 1;
 	gl_Position.z = 0;
 	gl_Position.w = 1;
 	

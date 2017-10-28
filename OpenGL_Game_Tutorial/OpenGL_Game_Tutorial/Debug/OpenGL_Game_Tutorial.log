@@ -1,6 +1,4 @@
 ﻿  MainGame.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  main.cpp
+c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\maingame.cpp(138): warning C4018: '<': signed/unsigned mismatch
      Creating library C:\SourceCode\OpenGL_Game_Tutorial\Debug\OpenGL_Game_Tutorial.lib and object C:\SourceCode\OpenGL_Game_Tutorial\Debug\OpenGL_Game_Tutorial.exp
   OpenGL_Game_Tutorial.vcxproj -> C:\SourceCode\OpenGL_Game_Tutorial\Debug\OpenGL_Game_Tutorial.exe

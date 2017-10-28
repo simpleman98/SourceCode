@@ -1,11 +1,10 @@
 #include "Sprite.h"
 #include "Vertex.h"
 #include <cstdlib>
+#include "ResourceManager.h"
 
 Sprite::Sprite(float screenWidth, float screenHeight)
 {
-	_screenWidth = screenWidth;
-	_screenHeight = screenHeight;
 	_vboID = 0;
 }
 
@@ -23,12 +22,16 @@ Sprite::~Sprite()
 	}
 }
 
-void Sprite::init(float x, float y, float width, float height)
+void Sprite::init(float x, float y, float width, float height, std::string texturePath)
 {
 	_x = x;
 	_y = y;
 	_width = width;
 	_height = height;
+
+	_texture = ResourceManager::getTexture(texturePath);
+
+	//Generate the buffer if it hasent already been generrated
 
 	if (_vboID == 0)
 	{
@@ -84,7 +87,7 @@ void Sprite::init(float x, float y, float width, float height)
 
 void Sprite::draw()
 {
-
+	glBindTexture(GL_TEXTURE_2D, _texture.id);
 	// bind the buffer objects
 	glBindBuffer(GL_ARRAY_BUFFER, _vboID);
 	//Tell opengl that we want to use the first 
@@ -106,63 +109,3 @@ void Sprite::draw()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void Sprite::initNormalized(float x, float y, float width, float height)
-{
-	_x = x;
-	_y = y;
-	_width = width;
-	_height = height;
-
-	float xbinary =(x / (_screenWidth/2)) -1.0f;
-	float ybinary = (y / (_screenHeight /2)) -1.0f;
-
-	float widthbinary = (width / (_screenWidth /2));
-	float heightbinary = (height / (_screenWidth /2));
-
-
-	if (_vboID == 0)
-	{
-		glGenBuffers(1, &_vboID);
-	}
-
-	Vertex vertexData[6];
-
-	//First Triangle 
-	
-	vertexData[0].setPosition(xbinary + widthbinary, ybinary + heightbinary);
-	vertexData[0].setUV(1.0f, 1.0f);
-
-	vertexData[1].setPosition(xbinary, ybinary + heightbinary);
-	vertexData[1].setUV(0.0f, 1.0f);
-
-
-	vertexData[2].setPosition(xbinary, ybinary);
-	vertexData[2].setUV(0.0f, 0.0f);
-
-
-	//SecondTriangle
-	vertexData[3].setPosition(xbinary, ybinary);
-	vertexData[3].setUV(0.0f, 0.0f);
-
-	vertexData[4].setPosition(xbinary + widthbinary, ybinary);
-	vertexData[4].setUV(1.0f, 0.0f);
-
-
-	vertexData[5].setPosition(xbinary + widthbinary, ybinary + heightbinary);
-	vertexData[5].setUV(1.0f, 1.0f);
-
-	for (int i = 0; i < 6; i++)
-	{
-		vertexData[i].setColor(255, 0, 255, 255);
-	}
-
-
-	/*vertexData[1].setColor(0, 0, 255, 255);
-	vertexData[4].setColor(0, 255, 0, 255);
-	*/
-
-
-	glBindBuffer(GL_ARRAY_BUFFER, _vboID);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
