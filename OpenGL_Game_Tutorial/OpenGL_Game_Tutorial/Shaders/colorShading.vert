@@ -9,13 +9,18 @@ out vec2 fragmentPosition;
 out vec4 fragmentColor;
 out vec2 fragmentUV;
 
+uniform mat4 P;
+
 void main()
 {
-	gl_Position.xy = vertexPosition * 1;
+	gl_Position.xy = (P* vec4(vertexPosition,0.0,1.0)).xy;
 	gl_Position.z = 0;
+	
+	//inidicated that the coordinates are normalized
 	gl_Position.w = 1;
 	
-	fragmentColor = vertexColor;
 	fragmentPosition = vertexPosition;
-	fragmentUV = vec2(vertexUV.x,1.0 - vertexUV.y);
+	fragmentColor = vertexColor;
+	
+	fragmentUV = vec2(vertexUV.x, 1.0 - vertexUV.y);
 }

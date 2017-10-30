@@ -9,6 +9,7 @@
 #include <MyGameEngine\GLSLProgram.h>
 #include <MyGameEngine\GLTexture.h>
 #include <MyGameEngine\Window.h>
+#include <MyGameEngine\Camera2D.h>
 
 enum class GameState { PLAY, EXIT };
 
@@ -23,6 +24,7 @@ public:
 
 private:
 	MyGameEngine::Window _window;
+	MyGameEngine::Camera2D _camera;
 	void initSystems();
 
 	void processInput();

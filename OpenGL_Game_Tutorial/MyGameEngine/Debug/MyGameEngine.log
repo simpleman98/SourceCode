@@ -1,4 +1,18 @@
-﻿  MyGameEngine.cpp
+﻿  Window.cpp
+  TextureCache.cpp
+  Sprite.cpp
+  ResourceManager.cpp
+  picoPNG.cpp
+  MyGameEngine.cpp
+  IOManager.cpp
+c:\sourcecode\opengl_game_tutorial\mygameengine\iomanager.h(9): warning C4091: 'static ': ignored on left of 'MyGameEngine::IOManager' when no variable is declared
+c:\sourcecode\opengl_game_tutorial\mygameengine\iomanager.cpp(19): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+  ImageLoader.cpp
+c:\sourcecode\opengl_game_tutorial\mygameengine\iomanager.h(9): warning C4091: 'static ': ignored on left of 'MyGameEngine::IOManager' when no variable is declared
+  GLSLProgram.cpp
+  Errors.cpp
+  Camera2D.cpp
+  Generating Code...
 opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 opengl32.lib(OPENGL32.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
 glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored

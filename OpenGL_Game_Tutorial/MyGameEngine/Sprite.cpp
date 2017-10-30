@@ -68,7 +68,7 @@ namespace MyGameEngine
 
 		for (int i = 0; i < 6; i++)
 		{
-			vertexData[i].setColor(255, 0, 255, 255);
+			vertexData[i].setColor(255, 255, 255, 255);
 		}
 
 

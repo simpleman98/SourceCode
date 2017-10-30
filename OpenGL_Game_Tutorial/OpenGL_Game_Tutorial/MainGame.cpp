@@ -8,13 +8,13 @@
 
 
 MainGame::MainGame()
-	:_screenWidth(1000),
-	_screenHeight(600),
+	:_screenWidth(1200),
+	_screenHeight(700),
 	_time(0.0f), 
 	_gameState(GameState::PLAY),
 	_maxFPS(60.0f)
 {
-
+	_camera.init(_screenWidth,_screenHeight);
 	
 }
 
@@ -31,13 +31,12 @@ void MainGame::Run()
 	_sprite = s;
 	_sprite.initNormalized(0.0f, 0.0f, 500.0f, 500.0f);*/
 	_sprites.push_back(new MyGameEngine::Sprite());
-	_sprites.back()->init(-1.0f, -1.0f, 1.0f, 1.0f, "Textures/sphere.png");
+	_sprites.back()->init(0.0f, 0.0f,(float) (200), (float)(200), "Textures/sphere.png");
 
-	_sprites.push_back(new MyGameEngine::Sprite());
-	_sprites.back()->init(0.0f, -1.0f, 1.0f, 1.0f, "Textures/sphere.png");
+	/*_sprites.push_back(new MyGameEngine::Sprite());
+	_sprites.back()->init((float)_screenWidth / 2,0.0f, (float)_screenWidth / 2, (float)_screenHeight / 2, "Textures/sphere.png");*/
 
-	_sprites.push_back(new MyGameEngine::Sprite());
-	_sprites.back()->init(-1.0f, 0.0f, 1.0f, 1.0f, "Textures/sphere.png");
+
 	
 
 
@@ -75,6 +74,16 @@ void MainGame::processInput()
 		case SDL_MOUSEMOTION:
 			//std::cout << evnt.motion.x << " " << evnt.motion.y << std::endl;
 			break;
+		case SDL_KEYDOWN:
+			switch (evnt.key.keysym.sym)
+			{
+				case SDLK_w:
+					_camera.setPosition(_camera.getPosition()+ glm::vec2(0.0, 1.0));
+					break;
+				case SDLK_s:
+					_camera.setPosition(_camera.getPosition() + glm::vec2(0.0, -1.0));
+					break;
+			}
 
 		}
 	}
@@ -86,9 +95,12 @@ void MainGame::gameLoop()
 	{
 		//used for frame time measuring
 		float startTicks = SDL_GetTicks();
-		processInput();
 
-		_time += 0.001f;
+		processInput();
+		_time += 0.1f;
+
+		_camera.update();
+
 		drawGame();
 
 		calculateFPS();
@@ -121,13 +133,18 @@ void MainGame::drawGame()
 	glActiveTexture(GL_TEXTURE0);
 
 
-
-
 	GLint textureLocation = _colorProgram.getUniformLocation("mySampler");
 	glUniform1i(textureLocation,0);
 
-	/*GLuint timeLocation = _colorProgram.getUniformLocation("time");
-	glUniform1f(timeLocation, _time);*/
+	//GLuint timeLocation = _colorProgram.getUniformLocation("time");
+	//glUniform1f(timeLocation, _time);
+
+
+	//set the camera matrix 
+	GLint pLocation = _colorProgram.getUniformLocation("P");
+	glm::mat4 cameraMatrix = _camera.getCameraMatrix();
+
+	glUniformMatrix2fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
  
 	for (int i = 0; i < _sprites.size(); i++)
 	{
