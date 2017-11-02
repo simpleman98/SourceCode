@@ -10,7 +10,7 @@
 #include <MyGameEngine\GLTexture.h>
 #include <MyGameEngine\Window.h>
 #include <MyGameEngine\Camera2D.h>
-
+#include <MyGameEngine\SpriteBatch.h>
 enum class GameState { PLAY, EXIT };
 
 class MainGame
@@ -23,8 +23,7 @@ public:
 
 
 private:
-	MyGameEngine::Window _window;
-	MyGameEngine::Camera2D _camera;
+
 	void initSystems();
 
 	void processInput();
@@ -38,11 +37,15 @@ private:
 
 	GameState _gameState;
 	MyGameEngine::Sprite _sprite;
-	std::vector<MyGameEngine::Sprite*> _sprites;
+	
 
-
-
+	MyGameEngine::Window _window;
+	MyGameEngine::Camera2D _camera;
 	MyGameEngine::GLSLProgram _colorProgram;
+
+	MyGameEngine::SpriteBatch _spriteBatch;
+
+
 
 	float _fps;
 	float _frameTime;

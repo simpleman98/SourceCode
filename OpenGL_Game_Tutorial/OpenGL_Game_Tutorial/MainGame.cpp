@@ -4,7 +4,7 @@
 #include <string>
 
 #include <MyGameEngine\Errors.h>
-
+#include <MyGameEngine\ResourceManager.h>
 
 
 MainGame::MainGame()
@@ -14,7 +14,7 @@ MainGame::MainGame()
 	_gameState(GameState::PLAY),
 	_maxFPS(60.0f)
 {
-	_camera.init(_screenWidth,_screenHeight);
+	_camera.init(_screenWidth, _screenHeight);
 	
 }
 
@@ -26,21 +26,9 @@ MainGame::~MainGame()
 
 void MainGame::Run()
 {
-	initSystems();
-   /* Sprite s(_screenWidth, _screenHeight);
-	_sprite = s;
-	_sprite.initNormalized(0.0f, 0.0f, 500.0f, 500.0f);*/
-	_sprites.push_back(new MyGameEngine::Sprite());
-	_sprites.back()->init(0.0f, 0.0f,(float) (200), (float)(200), "Textures/sphere.png");
-
-	/*_sprites.push_back(new MyGameEngine::Sprite());
-	_sprites.back()->init((float)_screenWidth / 2,0.0f, (float)_screenWidth / 2, (float)_screenHeight / 2, "Textures/sphere.png");*/
-
-
 	
+	initSystems();
 
-
-	//_playerTexture = ImageLoader::loadPNG("Textures/sphere.png");
 
 
 	gameLoop();
@@ -56,13 +44,15 @@ void MainGame::initSystems()
 
 	// Initialize Shaders
 	initShaders();
+	_spriteBatch.init();
 
 }
 
 void MainGame::processInput()
 {
 	SDL_Event evnt;
-
+	const float CAMERA_SPEED = 20;
+	const float SCALE_SPEED = 0.1f;
 	while (SDL_PollEvent(&evnt))
 	{
 		switch (evnt.type)
@@ -78,11 +68,26 @@ void MainGame::processInput()
 			switch (evnt.key.keysym.sym)
 			{
 				case SDLK_w:
-					_camera.setPosition(_camera.getPosition()+ glm::vec2(0.0, 1.0));
+					_camera.setPosition(_camera.getPosition()+ glm::vec2(0.0, CAMERA_SPEED));
 					break;
 				case SDLK_s:
-					_camera.setPosition(_camera.getPosition() + glm::vec2(0.0, -1.0));
+					_camera.setPosition(_camera.getPosition() + glm::vec2(0.0, -CAMERA_SPEED));
 					break;
+				case SDLK_a:
+					_camera.setPosition(_camera.getPosition() + glm::vec2(-CAMERA_SPEED, 0));
+					break;
+				case SDLK_d:
+					_camera.setPosition(_camera.getPosition() + glm::vec2(CAMERA_SPEED, 0));
+					break;
+
+				case SDLK_q:
+					_camera.setScale(_camera.getScale() + SCALE_SPEED);
+					break;
+
+				case SDLK_e:
+					_camera.setScale(_camera.getScale() - SCALE_SPEED);
+					break;
+
 			}
 
 		}
@@ -97,7 +102,7 @@ void MainGame::gameLoop()
 		float startTicks = SDL_GetTicks();
 
 		processInput();
-		_time += 0.1f;
+		_time += 0.01;
 
 		_camera.update();
 
@@ -144,12 +149,32 @@ void MainGame::drawGame()
 	GLint pLocation = _colorProgram.getUniformLocation("P");
 	glm::mat4 cameraMatrix = _camera.getCameraMatrix();
 
-	glUniformMatrix2fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
+	glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
  
-	for (int i = 0; i < _sprites.size(); i++)
+	_spriteBatch.begin();
+
+	glm::vec4 pos(0.0f, 0.0f, 50.0f, 50.0f);
+	glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
+
+	static MyGameEngine::GLTexture texture = MyGameEngine::ResourceManager::getTexture("Textures/sphere.png");
+
+	MyGameEngine::Color color;
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
+	color.a = 255;
+
+	for (int i = 0; i < 1000; i++)
 	{
-		_sprites[i]->draw();
+		_spriteBatch.draw(pos, uv, texture.id, 0.0f, color);
+		_spriteBatch.draw(pos + glm::vec4(50, 0, 0, 0), uv, texture.id, 0.0f, color);
 	}
+	
+
+
+
+	_spriteBatch.end();
+	_spriteBatch.renderBatch();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 

@@ -9,7 +9,7 @@ namespace MyGameEngine
 	{
 	public:
 		Sprite(); // default constructor
-		Sprite(float screenWidth, float screenHeight);
+		
 
 		~Sprite();
 

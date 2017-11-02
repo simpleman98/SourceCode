@@ -5,11 +5,6 @@
 namespace MyGameEngine
 {
 
-	Sprite::Sprite(float screenWidth, float screenHeight)
-	{
-		_vboID = 0;
-	}
-
 	Sprite::Sprite()
 	{
 
@@ -95,6 +90,8 @@ namespace MyGameEngine
 		//Tell opengl that we want to use the first 
 		//attribute array.
 		glEnableVertexAttribArray(0); // 0 index 
+		glEnableVertexAttribArray(1); // 0 index 
+		glEnableVertexAttribArray(2); // 0 index 
 
 		// Position attribute pointer
 		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
@@ -108,6 +105,8 @@ namespace MyGameEngine
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+		glDisableVertexAttribArray(2);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 }
