@@ -55,7 +55,7 @@ namespace MyGameEngine
 		std::printf("**** OpenGL Version %s **** \n", glGetString(GL_VERSION));
 
 		// Set background Color
-		glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 		//SDL_GL_SetSwapInterval(1);
 

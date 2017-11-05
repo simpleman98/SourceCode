@@ -13,7 +13,7 @@ namespace MyGameEngine
 	{
 	}
 	void SpriteBatch::init()
-	{
+	{		
 		createVertexArray();
 	}
 	void SpriteBatch::begin(GlyphSortType sortType/* = GlyphSortType::TEXTURE*/)
@@ -73,6 +73,28 @@ namespace MyGameEngine
 		_glyphs.push_back(newGlyph);
 
 	}
+	void SpriteBatch::draw(const glm::vec4 & destRect, GLuint texture, float depth, const Color & color)
+	{
+		Glyph* newGlyph = new Glyph;
+		newGlyph->topLeft.color = color;
+		newGlyph->topLeft.setPosition(destRect.x, destRect.y + destRect.w);
+		newGlyph->topLeft.setUV(0,0);
+
+		newGlyph->bottomLeft.color = color;
+		newGlyph->bottomLeft.setPosition(destRect.x, destRect.y);
+		newGlyph->topLeft.setUV(0, 0);
+
+		newGlyph->bottomRight.color = color;
+		newGlyph->bottomRight.setPosition(destRect.x + destRect.z, destRect.y);
+		newGlyph->topLeft.setUV(0, 0);
+
+		newGlyph->topRight.color = color;
+		newGlyph->topRight.setPosition(destRect.x + destRect.z, destRect.y + destRect.w);
+		newGlyph->topLeft.setUV(0, 0);
+
+
+		_glyphs.push_back(newGlyph);
+	}
 
 
 	void SpriteBatch::sortGlyphs()
@@ -107,10 +129,12 @@ namespace MyGameEngine
 
 	void SpriteBatch::createVertexArray()
 	{
+		
 		if (_vao == 0)
 		{
 			glGenVertexArrays(1, &_vao);
 		}
+
 		glBindVertexArray(_vao);
 
 		if (_vbo == 0)

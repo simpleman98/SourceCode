@@ -11,6 +11,7 @@
 #include <MyGameEngine\Window.h>
 #include <MyGameEngine\Camera2D.h>
 #include <MyGameEngine\SpriteBatch.h>
+#include <MyGameEngine\Graph.h>
 enum class GameState { PLAY, EXIT };
 
 class MainGame
@@ -25,7 +26,7 @@ public:
 private:
 
 	void initSystems();
-
+	bool AreSecondsElapsed(float seconds);
 	void processInput();
 	void gameLoop();
 	void drawGame();
@@ -45,7 +46,11 @@ private:
 
 	MyGameEngine::SpriteBatch _spriteBatch;
 
+	std::vector<glm::vec4> _spritePositions;
+	MyMath::Graph _graph;
 
+	
+	
 
 	float _fps;
 	float _frameTime;

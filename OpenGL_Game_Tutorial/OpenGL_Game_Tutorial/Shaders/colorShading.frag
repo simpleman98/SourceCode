@@ -13,7 +13,7 @@ void main()
 	 vec4 textureColor = texture(mySampler,fragmentUV);
 	
 	
-	color = textureColor;
+	color = fragmentColor;
 	
 	//color = vec4(fragmentColor.r * (cos(fragmentPosition.x * 4+time)+1.0) * 0.5,
 	//			 fragmentColor.g * (cos(fragmentPosition.y * 8+time)+1.0) * 0.5,

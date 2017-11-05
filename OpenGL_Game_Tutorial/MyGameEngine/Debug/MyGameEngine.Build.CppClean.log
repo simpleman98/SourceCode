@@ -11,6 +11,8 @@ c:\sourcecode\opengl_game_tutorial\mygameengine\debug\resourcemanager.obj
 c:\sourcecode\opengl_game_tutorial\mygameengine\debug\sprite.obj
 c:\sourcecode\opengl_game_tutorial\mygameengine\debug\texturecache.obj
 c:\sourcecode\opengl_game_tutorial\mygameengine\debug\window.obj
+c:\sourcecode\opengl_game_tutorial\mygameengine\debug\spritebatch.obj
+c:\sourcecode\opengl_game_tutorial\mygameengine\debug\graph.obj
 c:\sourcecode\opengl_game_tutorial\debug\mygameengine.lib
 c:\sourcecode\opengl_game_tutorial\debug\mygameengine.pdb
 c:\sourcecode\opengl_game_tutorial\mygameengine\debug\mygameengine.tlog\cl.command.1.tlog

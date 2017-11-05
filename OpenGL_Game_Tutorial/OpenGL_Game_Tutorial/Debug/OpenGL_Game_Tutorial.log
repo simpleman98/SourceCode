@@ -1,8 +1,2 @@
-﻿  MainGame.cpp
-c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\maingame.cpp(102): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
-c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\maingame.cpp(105): warning C4305: '+=': truncation from 'double' to 'float'
-c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\maingame.cpp(124): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
-c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\maingame.cpp(204): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
-c:\sourcecode\opengl_game_tutorial\opengl_game_tutorial\maingame.cpp(207): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-     Creating library C:\SourceCode\OpenGL_Game_Tutorial\Debug\OpenGL_Game_Tutorial.lib and object C:\SourceCode\OpenGL_Game_Tutorial\Debug\OpenGL_Game_Tutorial.exp
+﻿     Creating library C:\SourceCode\OpenGL_Game_Tutorial\Debug\OpenGL_Game_Tutorial.lib and object C:\SourceCode\OpenGL_Game_Tutorial\Debug\OpenGL_Game_Tutorial.exp
   OpenGL_Game_Tutorial.vcxproj -> C:\SourceCode\OpenGL_Game_Tutorial\Debug\OpenGL_Game_Tutorial.exe

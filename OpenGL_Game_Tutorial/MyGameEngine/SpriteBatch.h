@@ -50,6 +50,8 @@ namespace MyGameEngine
 
 		void renderBatch();
 
+		void draw(const glm::vec4 & destRect, GLuint texture, float depth, const Color & color);
+
 	private:
 
 		void sortGlyphs();
@@ -63,6 +65,7 @@ namespace MyGameEngine
 		GlyphSortType _sortType;
 		std::vector<Glyph*> _glyphs;
 		std::vector<RenderBatch> _renderBatches;
+
 	};
 
 }

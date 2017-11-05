@@ -5,6 +5,8 @@
 
 #include <MyGameEngine\Errors.h>
 #include <MyGameEngine\ResourceManager.h>
+#include <vector>
+
 
 
 MainGame::MainGame()
@@ -15,6 +17,10 @@ MainGame::MainGame()
 	_maxFPS(60.0f)
 {
 	_camera.init(_screenWidth, _screenHeight);
+
+	
+
+	
 	
 }
 
@@ -44,7 +50,14 @@ void MainGame::initSystems()
 
 	// Initialize Shaders
 	initShaders();
-	_spriteBatch.init();
+	//_spriteBatch.init();
+
+	MyGameEngine::Color color;
+	color.r = 255;
+	color.g = 0;
+	color.b = 0;
+	color.a = 255;
+	_graph.init(_screenWidth, _screenHeight, color);
 
 }
 
@@ -151,30 +164,107 @@ void MainGame::drawGame()
 
 	glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
  
-	_spriteBatch.begin();
+	
+	_graph.startDraw();
 
-	glm::vec4 pos(0.0f, 0.0f, 50.0f, 50.0f);
-	glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
+	_graph.drawAxes(1);
+	_graph.drawCircel();
+	_graph.endDraw();
 
-	static MyGameEngine::GLTexture texture = MyGameEngine::ResourceManager::getTexture("Textures/sphere.png");
+	//_graph.drawAxis();
 
-	MyGameEngine::Color color;
-	color.r = 255;
-	color.g = 255;
-	color.b = 255;
-	color.a = 255;
+	//_graph.drawGrid();
+	//_graph.drawGraph();
 
-	for (int i = 0; i < 1000; i++)
-	{
-		_spriteBatch.draw(pos, uv, texture.id, 0.0f, color);
-		_spriteBatch.draw(pos + glm::vec4(50, 0, 0, 0), uv, texture.id, 0.0f, color);
-	}
+
+
 	
 
 
+	//_spriteBatch.begin();
 
-	_spriteBatch.end();
-	_spriteBatch.renderBatch();
+
+
+
+
+	//MyGameEngine::Color white;
+	//white.r = 255;
+	//white.g = 255;
+	//white.b = 255;
+	//white.a = 255;
+
+	//MyGameEngine::Color black;
+	//black.r = 0;
+	//black.g = 0;
+	//black.b = 0;
+	//black.a = 255;
+
+
+
+
+	////_spriteBatch.draw(pos, uv, (GLuint)0, 1, white);
+	////_spriteBatch.draw(pos, uv, (GLuint)0, 1, black);
+
+	//static float positionX = 0.0f;
+	//static float positionY = 0.0f;
+
+	//float RectWidth = 5.0f;
+	//float RectHeight = 5.0f;
+
+	//glm::vec4 uv(0.0f, 0.0f, 0.0f, 0.0f);
+
+	//static int presign = 1;
+
+	//if (AreSecondsElapsed(0.0f))
+	//{
+	//	_spritePositions.push_back(glm::vec4(positionX, positionY, RectWidth, RectHeight));
+	//	positionY += (2.5 * presign);
+
+	//	if (positionY > (_screenHeight /2)- RectHeight)
+	//	{
+	//		presign = -1;
+	//		positionX+= 10;
+	//	}
+
+	//	if (positionY < 0.0f)
+	//	{
+	//		presign = 1;
+	//		positionY += (2.5);
+	//		positionX += 10;
+	//	}
+	//	
+	//}
+
+
+
+	//
+
+	//for (int i = 0; i < _spritePositions.size(); i++)
+	//{
+	//	_spriteBatch.draw(_spritePositions[i], uv, (GLuint)0, 1, white);
+	//}
+	//
+	//for (int i = -_screenWidth; i <= _screenWidth; i++)
+	//{
+	//	_spriteBatch.draw(glm::vec4(i,0,1,1), uv, (GLuint)0, 1, white);
+	//}
+	
+	
+
+	
+
+	//static MyGameEngine::GLTexture texture = MyGameEngine::ResourceManager::getTexture("Textures/sphere.png");
+
+	//
+
+	//for (int i = 0; i < 1000; i++)
+	//{
+	//	_spriteBatch.draw(pos, uv, texture.id, 0.0f, color);
+	//	_spriteBatch.draw(pos + glm::vec4(50, 0, 0, 0), uv, texture.id, 0.0f, color);
+	//}
+
+	//_spriteBatch.end();
+	//_spriteBatch.renderBatch();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
@@ -240,6 +330,24 @@ void MainGame::calculateFPS()
 	}
 	
 }
+
+bool MainGame::AreSecondsElapsed(float seconds)
+{
+	Uint32 deltaTime = 0;
+	static Uint32 oldTime = 0;
+	Uint32 actualTime = SDL_GetTicks();
+
+	deltaTime = SDL_GetTicks() - oldTime;
+	if (deltaTime >= (int)(seconds * 1000))
+	{
+		oldTime = actualTime;
+		return true;
+	}
+	
+	return false;
+
+}
+
 
 
 

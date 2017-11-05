@@ -1,4 +1,3 @@
-﻿  SpriteBatch.cpp
-c:\sourcecode\opengl_game_tutorial\mygameengine\spritebatch.cpp(35): warning C4018: '<': signed/unsigned mismatch
-c:\sourcecode\opengl_game_tutorial\mygameengine\spritebatch.cpp(162): warning C4018: '<': signed/unsigned mismatch
+﻿  Graph.cpp
+c:\sourcecode\opengl_game_tutorial\mygameengine\graph.cpp(33): warning C4305: '+=': truncation from 'double' to 'float'
   MyGameEngine.vcxproj -> C:\SourceCode\OpenGL_Game_Tutorial\Debug\MyGameEngine.lib
